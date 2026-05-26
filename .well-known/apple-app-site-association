@@ -6,7 +6,7 @@
         "components": [
           {
             "/": "/ref*",
-            "comment": "Influencer deeplink — stackr.app/ref?esn=CODE&mn=CODE"
+            "comment": "Influencer deeplink — stackr.info/ref?esn=CODE&mn=CODE"
           }
         ]
       }

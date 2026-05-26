@@ -1,2 +1,2 @@
 # stackr-web
-stackr.app — GitHub Pages Website
+stackr.info — GitHub Pages Website
