@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stackr – Dein Supplement-Stack. Organisiert.</title>
+  <meta name="description" content="Stackr hilft dir, deine Supplements zu tracken, Deals von ESN und More Nutrition zu nutzen und immer den Überblick zu behalten." />
+  <meta property="og:title" content="Stackr" />
+  <meta property="og:description" content="Dein Supplement-Stack. Organisiert." />
+  <meta property="og:image" content="/assets/og-image.png" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --orange: #BF360C;
+      --orange-light: #FF6D40;
+      --bg: #0D0D0D;
+      --surface: #1A1A1A;
+      --text: #F5F5F5;
+      --muted: #888;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1.5rem;
+      text-align: center;
+    }
+
+    .icon {
+      width: 100px;
+      height: 100px;
+      background: var(--orange);
+      border-radius: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 52px;
+      margin: 0 auto 2rem;
+      box-shadow: 0 8px 32px rgba(191, 54, 12, 0.4);
+    }
+
+    h1 {
+      font-size: clamp(2rem, 6vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 1rem;
+    }
+
+    h1 span { color: var(--orange-light); }
+
+    p.subtitle {
+      font-size: 1.15rem;
+      color: var(--muted);
+      max-width: 480px;
+      line-height: 1.6;
+      margin-bottom: 2.5rem;
+    }
+
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: var(--orange);
+      color: #fff;
+      font-size: 1.05rem;
+      font-weight: 700;
+      padding: 0.9rem 2rem;
+      border-radius: 14px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.1s;
+      box-shadow: 0 4px 16px rgba(191, 54, 12, 0.35);
+    }
+
+    .cta:hover { background: var(--orange-light); transform: translateY(-1px); }
+    .cta:active { transform: translateY(0); }
+
+    .badges {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .badge {
+      background: var(--surface);
+      border: 1px solid #2a2a2a;
+      border-radius: 12px;
+      padding: 0.7rem 1.2rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .badge strong { color: var(--text); display: block; font-size: 1rem; }
+
+    footer {
+      margin-top: 4rem;
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    footer a { color: var(--muted); text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <div class="icon">💊</div>
+
+  <h1>Dein <span>Supplement-Stack.</span><br>Organisiert.</h1>
+
+  <p class="subtitle">
+    Stackr trackt deine Supplements, zeigt dir aktuelle Deals von ESN und More Nutrition –
+    automatisch mit deinem Influencer-Code.
+  </p>
+
+  <a class="cta" href="https://apps.apple.com/app/stackr/id6748765911">
+    📱 Im App Store laden
+  </a>
+
+  <div class="badges">
+    <div class="badge">
+      <strong>ESN</strong>
+      Deals & Codes
+    </div>
+    <div class="badge">
+      <strong>More Nutrition</strong>
+      Deals & Codes
+    </div>
+    <div class="badge">
+      <strong>Kostenlos</strong>
+      iOS App
+    </div>
+  </div>
+
+  <footer>
+    <a href="/privacy">Datenschutz</a> &nbsp;·&nbsp;
+    <a href="/terms">Nutzungsbedingungen</a>
+    <br><br>
+    &copy; 2026 Stackr
+  </footer>
+
+</body>
+</html>

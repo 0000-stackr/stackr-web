@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stackr öffnen…</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --orange: #BF360C;
+      --orange-light: #FF6D40;
+      --bg: #0D0D0D;
+      --surface: #1A1A1A;
+      --text: #F5F5F5;
+      --muted: #888;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      gap: 1.5rem;
+    }
+
+    .icon {
+      width: 80px;
+      height: 80px;
+      background: var(--orange);
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+      box-shadow: 0 8px 32px rgba(191, 54, 12, 0.4);
+    }
+
+    h1 { font-size: 1.6rem; font-weight: 800; letter-spacing: -0.02em; }
+
+    p { color: var(--muted); font-size: 1rem; line-height: 1.5; max-width: 320px; }
+
+    .codes {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      width: 100%;
+      max-width: 320px;
+    }
+
+    .code-row {
+      background: var(--surface);
+      border: 1px solid #2a2a2a;
+      border-radius: 14px;
+      padding: 0.9rem 1.2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .code-row .shop { font-size: 0.8rem; color: var(--muted); }
+    .code-row .code { font-size: 1.1rem; font-weight: 700; font-variant-numeric: tabular-nums; letter-spacing: 0.05em; }
+
+    .btn {
+      display: inline-block;
+      background: var(--orange);
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 700;
+      padding: 0.85rem 2rem;
+      border-radius: 14px;
+      text-decoration: none;
+      width: 100%;
+      max-width: 320px;
+      transition: background 0.2s;
+    }
+
+    .btn:hover { background: var(--orange-light); }
+
+    .hint { font-size: 0.8rem; color: var(--muted); }
+  </style>
+</head>
+<body>
+
+  <div class="icon">💊</div>
+
+  <h1>Stackr öffnen</h1>
+
+  <p>Dein Rabattcode wird automatisch aktiviert.</p>
+
+  <div class="codes" id="codes"></div>
+
+  <a class="btn" id="openBtn" href="#">Stackr öffnen</a>
+
+  <p class="hint" id="hint">Wird automatisch geöffnet…</p>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const esn = params.get('esn');
+    const mn  = params.get('mn');
+
+    // App Store URL — update once Stackr is live
+    const APP_STORE_URL = 'https://apps.apple.com/app/stackr/id6748765911';
+
+    // Build deep link
+    const deepParams = new URLSearchParams();
+    if (esn) deepParams.set('esn', esn);
+    if (mn)  deepParams.set('mn',  mn);
+
+    const deepLink = 'stackr://ref?' + deepParams.toString();
+
+    // Show code rows
+    const codesEl = document.getElementById('codes');
+    if (esn) {
+      codesEl.innerHTML += `
+        <div class="code-row">
+          <span class="shop">ESN</span>
+          <span class="code">${esn.toUpperCase()}</span>
+        </div>`;
+    }
+    if (mn) {
+      codesEl.innerHTML += `
+        <div class="code-row">
+          <span class="shop">More Nutrition</span>
+          <span class="code">${mn.toUpperCase()}</span>
+        </div>`;
+    }
+
+    // Button
+    const btn = document.getElementById('openBtn');
+    btn.href = deepLink;
+
+    // Auto-open deep link
+    window.location.href = deepLink;
+
+    // Fallback: App Store after 1.8s if app not installed
+    let fallbackTimer = setTimeout(() => {
+      document.getElementById('hint').textContent =
+        'App nicht installiert? Jetzt im App Store laden.';
+      btn.textContent = '📱 Im App Store laden';
+      btn.href = APP_STORE_URL;
+    }, 1800);
+
+    // Cancel fallback if page goes hidden (app opened successfully)
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) clearTimeout(fallbackTimer);
+    });
+  </script>
+
+</body>
+</html>
