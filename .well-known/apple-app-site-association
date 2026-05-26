@@ -1,0 +1,15 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["QV64L84RFS.com.au2mator.stackr"],
+        "components": [
+          {
+            "/": "/ref*",
+            "comment": "Influencer deeplink — stackr.app/ref?esn=CODE&mn=CODE"
+          }
+        ]
+      }
+    ]
+  }
+}
