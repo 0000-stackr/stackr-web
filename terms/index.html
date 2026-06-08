@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nutzungsbedingungen – Stackr</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --orange: #BF360C; --orange-light: #FF6D40; --bg: #0D0D0D; --card: #1A1A1A; --border: #2A2A2A; --text: #F5F5F5; --muted: #888; }
+    body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif; -webkit-font-smoothing: antialiased; line-height: 1.7; }
+
+    nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 clamp(1.5rem, 5vw, 4rem); height: 64px;
+      background: rgba(13,13,13,0.9); backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo img { width: 30px; height: 30px; border-radius: 7px; }
+    .nav-logo span { font-size: 1.1rem; font-weight: 800; color: var(--text); }
+    nav a.back { color: var(--muted); text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+    nav a.back:hover { color: var(--text); }
+
+    .container { max-width: 780px; margin: 0 auto; padding: clamp(3rem, 6vh, 5rem) clamp(1.5rem, 5vw, 3rem); }
+
+    h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 900; letter-spacing: -0.03em; margin-bottom: 0.5rem; }
+    .meta { color: var(--muted); font-size: 0.85rem; margin-bottom: 3rem; }
+    .meta span { color: var(--orange-light); }
+
+    h2 { font-size: 1.15rem; font-weight: 800; margin-top: 2.5rem; margin-bottom: 0.75rem; color: var(--text); }
+    p { color: #ccc; margin-bottom: 1rem; font-size: 0.95rem; }
+    ul { color: #ccc; margin: 0.5rem 0 1rem 1.5rem; font-size: 0.95rem; }
+    ul li { margin-bottom: 0.4rem; }
+    a { color: var(--orange-light); }
+
+    .highlight {
+      background: rgba(191,54,12,0.08); border: 1px solid rgba(191,54,12,0.2);
+      border-radius: 12px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; font-size: 0.9rem; color: #ccc;
+    }
+
+    footer { text-align: center; padding: 2rem; color: var(--muted); font-size: 0.8rem; border-top: 1px solid var(--border); margin-top: 4rem; }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="/" class="nav-logo">
+      <img src="/assets/app-icon.png" alt="Stackr" />
+      <span>Stackr</span>
+    </a>
+    <a href="/" class="back">← Zurück</a>
+  </nav>
+
+  <div class="container">
+    <h1>Nutzungsbedingungen</h1>
+    <p class="meta">Zuletzt aktualisiert: <span>Juni 2026</span></p>
+
+    <p>Willkommen bei Stackr. Durch die Nutzung der Stackr App und der Website stackr.app stimmst du diesen Nutzungsbedingungen zu. Bitte lies sie sorgfältig durch.</p>
+
+    <h2>1. Anbieter</h2>
+    <p>
+      <strong>Michael Seidl</strong><br>
+      Österreich<br>
+      E-Mail: <a href="mailto:support@stackr.app">support@stackr.app</a>
+    </p>
+
+    <h2>2. Leistungsbeschreibung</h2>
+    <p>Stackr ist eine iOS-App zur Verwaltung von Nahrungsergänzungsmitteln (Supplements). Die App bietet folgende Funktionen:</p>
+    <ul>
+      <li>Tracking von Supplement-Beständen (Stacks)</li>
+      <li>Anzeige von Preisen und Angeboten von Drittanbieter-Shops</li>
+      <li>Paket- und Liefertracking</li>
+      <li>Haushalt-Synchronisierung (geteilte Stacks)</li>
+      <li>Push Notifications für Alerts und Lieferungen</li>
+      <li>Pro-Features (kostenpflichtig, via In-App-Kauf)</li>
+    </ul>
+
+    <h2>3. Preisdaten und Shop-Inhalte</h2>
+    <div class="highlight">
+      <strong>Wichtiger Hinweis:</strong> Stackr zeigt Preise und Angebote von Drittanbieter-Shops (z.B. ESN, More Nutrition). Diese Daten werden automatisiert bezogen und können unvollständig, veraltet oder fehlerhaft sein. Stackr übernimmt <strong>keine Garantie</strong> für die Richtigkeit, Aktualität oder Vollständigkeit der angezeigten Preise und Verfügbarkeiten.<br><br>
+      Die verfügbaren Shops können sich jederzeit ändern. Die Integration bestimmter Shops kann ohne Vorankündigung eingestellt werden. Stackr hat keine offizielle Partnerschaft oder Vereinbarung mit den angezeigten Shops.
+    </div>
+
+    <h2>4. Pro-Subscription</h2>
+    <p>Stackr Pro ist ein kostenpflichtiges Abonnement, das über den Apple App Store abgewickelt wird. Es gelten die Zahlungs- und Stornierungsbedingungen von Apple.</p>
+    <ul>
+      <li>Die Abrechnung erfolgt über deinen Apple-Account</li>
+      <li>Das Abonnement verlängert sich automatisch, sofern es nicht mindestens 24 Stunden vor Ende der Laufzeit gekündigt wird</li>
+      <li>Kündigung in den iOS-Einstellungen unter Abonnements</li>
+      <li>Bereits bezahlte Zeiträume werden nicht erstattet</li>
+    </ul>
+
+    <h2>5. Nutzungsvoraussetzungen</h2>
+    <ul>
+      <li>Die App erfordert iOS 16.0 oder neuer</li>
+      <li>Für die Nutzung einiger Funktionen ist eine Internetverbindung erforderlich</li>
+      <li>Du musst mindestens 13 Jahre alt sein</li>
+    </ul>
+
+    <h2>6. Verbotene Nutzung</h2>
+    <p>Folgende Nutzungen sind untersagt:</p>
+    <ul>
+      <li>Missbrauch der App oder der Infrastruktur</li>
+      <li>Automatisierter Zugriff (Scraping, Bots) auf die App oder API</li>
+      <li>Reverse Engineering oder Dekompilierung der App</li>
+      <li>Weitergabe von Account-Zugangsdaten an Dritte (außer Haushalt-Funktion)</li>
+    </ul>
+
+    <h2>7. Haftungsausschluss</h2>
+    <p>Stackr wird "wie besehen" bereitgestellt. Wir übernehmen keine Haftung für:</p>
+    <ul>
+      <li>Fehlerhafte oder veraltete Preisangaben von Drittanbieter-Shops</li>
+      <li>Unterbrechungen oder Ausfälle der App</li>
+      <li>Datenverlust durch technische Probleme</li>
+      <li>Entscheidungen, die auf Basis der angezeigten Informationen getroffen werden</li>
+    </ul>
+    <p>Die Haftung ist im gesetzlich zulässigen Rahmen auf Vorsatz und grobe Fahrlässigkeit beschränkt.</p>
+
+    <h2>8. Geistiges Eigentum</h2>
+    <p>Alle Rechte an der App, dem Design, dem Logo und den Inhalten liegen bei Michael Seidl. Die Nutzung von Markennamen Dritter (ESN, More Nutrition etc.) erfolgt ausschließlich zur Identifikation der jeweiligen Shops und stellt keine Partnerschaft dar.</p>
+
+    <h2>9. Änderungen der Nutzungsbedingungen</h2>
+    <p>Wir behalten uns vor, diese Nutzungsbedingungen anzupassen. Wesentliche Änderungen werden in der App kommuniziert. Die fortgesetzte Nutzung nach einer Änderung gilt als Zustimmung.</p>
+
+    <h2>10. Anwendbares Recht</h2>
+    <p>Es gilt österreichisches Recht. Gerichtsstand ist Wien, Österreich.</p>
+
+    <h2>11. Kontakt</h2>
+    <p>Bei Fragen oder Beschwerden: <a href="mailto:support@stackr.app">support@stackr.app</a></p>
+  </div>
+
+  <footer>
+    © 2026 Stackr · <a href="/privacy">Datenschutz</a> · <a href="/terms">Nutzungsbedingungen</a> · Made with 🧡 in Austria
+  </footer>
+</body>
+</html>
