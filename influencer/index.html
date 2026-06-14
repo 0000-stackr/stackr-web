@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Stackr Community-Deal</title>
+  <meta name="description" content="14 Tage Stackr Pro kostenlos + dein persönlicher Rabattcode für ESN & More Nutrition." />
+  <meta name="robots" content="noindex" />
+  <meta property="og:title" content="Dein Stackr Community-Deal" />
+  <meta property="og:description" content="14 Tage Pro kostenlos + persönlicher Rabattcode." />
+  <meta property="og:image" content="/assets/og-image.png" />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#0D0D0D" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --orange: #BF360C;
+      --orange-light: #FF6D40;
+      --orange-glow: rgba(191, 54, 12, 0.4);
+      --bg: #0D0D0D;
+      --surface: #141414;
+      --card: #1A1A1A;
+      --border: #2A2A2A;
+      --text: #F5F5F5;
+      --muted: #8A8A8A;
+      --green: #34C759;
+      --radius: 18px;
+    }
+
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      line-height: 1.5;
+    }
+
+    .wrap { max-width: 1080px; margin: 0 auto; padding: 0 clamp(1.25rem, 5vw, 2.5rem); }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      background: var(--orange);
+      color: #fff;
+      font-size: 1.05rem;
+      font-weight: 800;
+      padding: 1.05rem 2rem;
+      border: none;
+      border-radius: 16px;
+      text-decoration: none;
+      cursor: pointer;
+      box-shadow: 0 10px 40px var(--orange-glow);
+      transition: transform .12s ease, background .2s ease, box-shadow .2s ease;
+      letter-spacing: -0.01em;
+    }
+    .btn:hover { background: var(--orange-light); transform: translateY(-2px); box-shadow: 0 14px 50px var(--orange-glow); }
+    .btn:active { transform: translateY(0); }
+    .btn.full { width: 100%; }
+    .btn .arrow { transition: transform .2s ease; }
+    .btn:hover .arrow { transform: translateX(4px); }
+
+    /* ── SKELETON / LOADING ── */
+    #loading {
+      position: fixed; inset: 0; z-index: 999;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 1.25rem; background: var(--bg);
+      transition: opacity .4s ease;
+    }
+    #loading.hide { opacity: 0; pointer-events: none; }
+    .spinner {
+      width: 44px; height: 44px; border-radius: 50%;
+      border: 3px solid var(--border); border-top-color: var(--orange);
+      animation: spin .8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      padding: clamp(3rem, 9vh, 5.5rem) 0 clamp(2.5rem, 6vh, 4rem);
+      text-align: center;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 60% 50% at 50% 0%, rgba(191,54,12,0.22) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 40% at 80% 30%, rgba(255,109,64,0.08) 0%, transparent 60%);
+    }
+    .hero > * { position: relative; z-index: 1; }
+
+    .app-icon {
+      width: 88px; height: 88px; border-radius: 20px;
+      box-shadow: 0 12px 40px var(--orange-glow);
+      margin: 0 auto 1.5rem;
+      display: block;
+    }
+
+    .badge-pill {
+      display: inline-flex; align-items: center; gap: .45rem;
+      background: rgba(52,199,89,0.12);
+      border: 1px solid rgba(52,199,89,0.3);
+      color: var(--green);
+      font-size: .8rem; font-weight: 700;
+      padding: .4rem .9rem; border-radius: 999px;
+      margin-bottom: 1.25rem;
+    }
+    .badge-pill .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); box-shadow: 0 0 8px var(--green); }
+
+    .hero h1 {
+      font-size: clamp(2.1rem, 7vw, 3.6rem);
+      font-weight: 900; letter-spacing: -0.035em; line-height: 1.05;
+      margin-bottom: 1rem;
+    }
+    .hero h1 .accent {
+      background: linear-gradient(120deg, var(--orange-light), var(--orange));
+      -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .hero .sub {
+      font-size: clamp(1.05rem, 2.5vw, 1.3rem);
+      color: var(--muted); max-width: 560px; margin: 0 auto 2rem;
+    }
+    .hero .sub strong { color: var(--text); font-weight: 700; }
+
+    .social-proof {
+      margin-top: 1.6rem;
+      display: flex; align-items: center; justify-content: center; gap: .65rem;
+      color: var(--muted); font-size: .9rem;
+    }
+    .avatars { display: flex; }
+    .avatars span {
+      width: 28px; height: 28px; border-radius: 50%;
+      border: 2px solid var(--bg);
+      margin-left: -10px;
+      background: linear-gradient(135deg, var(--orange), var(--orange-light));
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: .7rem; font-weight: 800; color: #fff;
+    }
+    .avatars span:first-child { margin-left: 0; }
+    .social-proof b { color: var(--text); }
+
+    /* ── SECTION ── */
+    section { padding: clamp(2.5rem, 7vh, 4.5rem) 0; }
+    .section-head { text-align: center; margin-bottom: 2.5rem; }
+    .section-head h2 {
+      font-size: clamp(1.6rem, 4.5vw, 2.4rem);
+      font-weight: 900; letter-spacing: -0.03em; margin-bottom: .6rem;
+    }
+    .section-head p { color: var(--muted); font-size: 1.05rem; max-width: 520px; margin: 0 auto; }
+
+    /* ── CODE SHOWCASE ── */
+    .codes-grid {
+      display: grid; gap: 1rem;
+      grid-template-columns: 1fr; max-width: 540px; margin: 0 auto;
+    }
+    .code-card {
+      position: relative;
+      background: linear-gradient(135deg, var(--card), #161616);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.4rem 1.5rem;
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+      cursor: pointer;
+      transition: border-color .2s ease, transform .12s ease, box-shadow .2s ease;
+      overflow: hidden;
+    }
+    .code-card::before {
+      content: ""; position: absolute; inset: 0;
+      background: radial-gradient(circle at 100% 0%, var(--orange-glow), transparent 60%);
+      opacity: 0; transition: opacity .3s ease;
+    }
+    .code-card:hover { border-color: var(--orange); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,.4); }
+    .code-card:hover::before { opacity: .25; }
+    .code-card .left { display: flex; flex-direction: column; gap: .35rem; position: relative; z-index: 1; }
+    .code-card .shop { font-size: .8rem; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: .05em; }
+    .code-card .code {
+      font-size: 1.6rem; font-weight: 900; letter-spacing: .05em;
+      font-variant-numeric: tabular-nums;
+      display: flex; align-items: center; gap: .6rem;
+    }
+    .code-card .copy-hint { font-size: .72rem; color: var(--muted); }
+    .code-card .right { display: flex; flex-direction: column; align-items: flex-end; gap: .5rem; position: relative; z-index: 1; }
+    .discount-badge {
+      background: var(--orange); color: #fff;
+      font-size: 1.1rem; font-weight: 900;
+      padding: .35rem .8rem; border-radius: 10px;
+      box-shadow: 0 4px 16px var(--orange-glow);
+    }
+    .copy-ico { font-size: 1rem; opacity: .6; }
+    .code-card.copied { border-color: var(--green); }
+    .code-card.copied .copy-hint { color: var(--green); font-weight: 700; }
+
+    .auto-note {
+      text-align: center; margin-top: 1.5rem; color: var(--muted); font-size: .9rem;
+      display: flex; align-items: center; justify-content: center; gap: .5rem;
+    }
+    .auto-note .ico { color: var(--orange-light); }
+
+    /* ── SCREENSHOTS ── */
+    .shots {
+      display: flex; gap: clamp(1rem, 3vw, 2rem);
+      justify-content: center; align-items: flex-end;
+      flex-wrap: wrap;
+    }
+    .phone {
+      position: relative;
+      width: clamp(200px, 60vw, 260px);
+      border-radius: 38px;
+      padding: 10px;
+      background: linear-gradient(160deg, #2a2a2a, #111);
+      box-shadow: 0 20px 60px rgba(0,0,0,.6), inset 0 0 0 1px rgba(255,255,255,.05);
+    }
+    .phone::before {
+      content: ""; position: absolute; top: 14px; left: 50%; transform: translateX(-50%);
+      width: 90px; height: 22px; background: #000; border-radius: 999px; z-index: 2;
+    }
+    .phone img { width: 100%; display: block; border-radius: 30px; }
+    .phone.tilt-l { transform: rotate(-4deg) translateY(10px); }
+    .phone.tilt-r { transform: rotate(4deg) translateY(10px); }
+    .phone.mid { z-index: 3; }
+    @media (max-width: 720px) {
+      .phone.tilt-l, .phone.tilt-r { display: none; }
+      .phone.mid { width: min(70vw, 280px); }
+    }
+
+    /* ── FEATURES ── */
+    .features { display: grid; gap: 1rem; grid-template-columns: repeat(2, 1fr); max-width: 760px; margin: 0 auto; }
+    @media (max-width: 560px) { .features { grid-template-columns: 1fr; } }
+    .feature {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1.5rem;
+      display: flex; gap: 1rem; align-items: flex-start;
+      transition: border-color .2s, transform .12s;
+    }
+    .feature:hover { border-color: #3a3a3a; transform: translateY(-2px); }
+    .feature .ico {
+      font-size: 1.6rem; flex-shrink: 0;
+      width: 46px; height: 46px; border-radius: 12px;
+      background: rgba(191,54,12,0.12);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .feature h3 { font-size: 1.05rem; font-weight: 800; margin-bottom: .25rem; }
+    .feature p { font-size: .9rem; color: var(--muted); }
+    .pro-tag {
+      display: inline-block; margin-top: .5rem;
+      background: rgba(52,199,89,0.12); color: var(--green);
+      font-size: .72rem; font-weight: 800; padding: .2rem .55rem; border-radius: 6px;
+    }
+
+    /* ── CTA BLOCK ── */
+    .cta-block {
+      text-align: center;
+      background: linear-gradient(135deg, rgba(191,54,12,0.12), rgba(20,20,20,0.4));
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: clamp(2.5rem, 6vw, 3.5rem) clamp(1.5rem, 5vw, 3rem);
+      max-width: 640px; margin: 0 auto;
+    }
+    .cta-block h2 { font-size: clamp(1.6rem, 5vw, 2.4rem); font-weight: 900; letter-spacing: -0.03em; margin-bottom: 1.5rem; }
+    .cta-block .btn { font-size: 1.1rem; }
+
+    /* App Store badge (CSS-only) */
+    .appstore-badge {
+      display: inline-flex; align-items: center; gap: .7rem;
+      background: #000; border: 1px solid #333;
+      border-radius: 12px; padding: .55rem 1.1rem;
+      text-decoration: none; color: #fff;
+      margin-top: 1.25rem;
+      transition: border-color .2s, transform .12s;
+    }
+    .appstore-badge:hover { border-color: #555; transform: translateY(-1px); }
+    .appstore-badge svg { width: 26px; height: 26px; }
+    .appstore-badge .t { display: flex; flex-direction: column; line-height: 1.1; text-align: left; }
+    .appstore-badge .t small { font-size: .62rem; color: #bbb; }
+    .appstore-badge .t span { font-size: 1.05rem; font-weight: 700; }
+
+    /* ── HOW IT WORKS ── */
+    .steps { display: grid; gap: 1.25rem; grid-template-columns: repeat(3, 1fr); max-width: 760px; margin: 0 auto; }
+    @media (max-width: 640px) { .steps { grid-template-columns: 1fr; } }
+    .step { text-align: center; padding: 1.5rem 1rem; }
+    .step .num {
+      width: 48px; height: 48px; border-radius: 50%;
+      background: var(--orange); color: #fff;
+      font-size: 1.3rem; font-weight: 900;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1rem; box-shadow: 0 6px 20px var(--orange-glow);
+    }
+    .step h3 { font-size: 1.05rem; font-weight: 800; margin-bottom: .35rem; }
+    .step p { font-size: .9rem; color: var(--muted); }
+
+    /* ── STICKY FOOTER CTA ── */
+    .sticky-cta {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 200;
+      padding: .85rem clamp(1rem, 5vw, 2rem) calc(.85rem + env(safe-area-inset-bottom, 0));
+      background: rgba(13,13,13,.92);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border-top: 1px solid var(--border);
+      transform: translateY(120%); transition: transform .35s ease;
+    }
+    .sticky-cta.show { transform: translateY(0); }
+    .sticky-cta .btn { max-width: 520px; margin: 0 auto; }
+
+    footer {
+      text-align: center; color: var(--muted); font-size: .82rem;
+      padding: 2.5rem 1rem calc(7rem + env(safe-area-inset-bottom, 0));
+    }
+    footer .risk { color: var(--text); font-weight: 600; margin-bottom: .5rem; }
+    footer a { color: var(--muted); }
+
+    .toast {
+      position: fixed; bottom: 90px; left: 50%; transform: translateX(-50%) translateY(20px);
+      background: var(--green); color: #fff; font-weight: 700; font-size: .9rem;
+      padding: .7rem 1.4rem; border-radius: 999px; z-index: 300;
+      opacity: 0; pointer-events: none; transition: opacity .25s, transform .25s;
+      box-shadow: 0 8px 24px rgba(0,0,0,.4);
+    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  </style>
+</head>
+<body>
+
+  <!-- Loading -->
+  <div id="loading">
+    <img class="app-icon" src="/assets/app-icon.png" alt="Stackr" />
+    <div class="spinner"></div>
+  </div>
+
+  <main id="app" hidden>
+
+    <!-- 1. HERO -->
+    <header class="hero">
+      <div class="hero-bg"></div>
+      <div class="wrap">
+        <img class="app-icon" src="/assets/app-icon.png" alt="Stackr App" />
+        <div class="badge-pill"><span class="dot"></span> Exklusiver Community-Deal</div>
+        <h1><span id="hero-name" class="accent">…</span>s<br>Community-Deal</h1>
+        <p class="sub"><strong><span id="hero-trial">14</span> Tage Pro kostenlos</strong> + dein persönlicher Rabattcode für ESN &amp; More Nutrition.</p>
+        <a href="#" class="btn" id="cta-hero" data-cta>Jetzt kostenlos starten <span class="arrow">→</span></a>
+        <div class="social-proof">
+          <div class="avatars"><span>S</span><span>M</span><span>K</span><span>+</span></div>
+          Bereits <b>2.847</b> Supplement-Nerds dabei
+        </div>
+      </div>
+    </header>
+
+    <!-- 2. CODE SHOWCASE -->
+    <section id="codes">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Deine Rabattcodes</h2>
+          <p>Tippe zum Kopieren — in der App werden sie automatisch eingetragen.</p>
+        </div>
+        <div class="codes-grid" id="codes-grid"><!-- dynamic --></div>
+        <p class="auto-note"><span class="ico">✓</span> Wird automatisch in der App eingetragen</p>
+      </div>
+    </section>
+
+    <!-- 3. SCREENSHOTS -->
+    <section id="shots">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>So sieht's in der App aus</h2>
+          <p>Dein Code direkt am Produkt — beim Nachkaufen einfach mitgenommen.</p>
+        </div>
+        <div class="shots">
+          <div class="phone tilt-l">
+            <img src="/assets/screenshots/20260605_180429000_iOS.png" alt="Stackr Lager" loading="lazy" />
+          </div>
+          <div class="phone mid">
+            <img src="/assets/screenshots/20260607_103440000_iOS.png" alt="ESN Kreatin mit Rabattcode" loading="lazy" />
+          </div>
+          <div class="phone tilt-r">
+            <img src="/assets/screenshots/20260605_194048000_iOS.png" alt="ESN Daily mit Rabattcode" loading="lazy" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. FEATURES -->
+    <section id="features">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Was du mit Stackr bekommst</h2>
+          <p>Dein kompletter Supplement-Stack — organisiert an einem Ort.</p>
+        </div>
+        <div class="features">
+          <div class="feature">
+            <div class="ico">🏋️</div>
+            <div><h3>Supplement-Inventar</h3><p>Alle Produkte, Mengen &amp; Stacks immer im Blick.</p></div>
+          </div>
+          <div class="feature">
+            <div class="ico">💊</div>
+            <div><h3>MHD-Tracking &amp; Alerts</h3><p>Push-Benachrichtigung bevor etwas abläuft.</p></div>
+          </div>
+          <div class="feature">
+            <div class="ico">🛒</div>
+            <div><h3>Deals &amp; Preisvergleiche</h3><p>Beste Preise &amp; deine Codes automatisch genutzt.<span class="pro-tag">PRO</span></p></div>
+          </div>
+          <div class="feature">
+            <div class="ico">📦</div>
+            <div><h3>Paket-Tracking</h3><p>Bestellungen verfolgen bis zur Haustür.<span class="pro-tag">PRO</span></p></div>
+          </div>
+        </div>
+        <p class="auto-note" style="margin-top:2rem;"><span class="ico">★</span> Alle Pro-Features <strong style="color:var(--text);margin:0 .3rem;">14 Tage kostenlos</strong> testen</p>
+      </div>
+    </section>
+
+    <!-- 5. ZWEITER CTA -->
+    <section id="cta2">
+      <div class="wrap">
+        <div class="cta-block">
+          <h2>Hol dir deinen <span id="cta2-name" style="color:var(--orange-light)">…</span>-Deal</h2>
+          <a href="#" class="btn full" id="cta-mid" data-cta><span id="cta2-trial">14</span> Tage Pro + Code kostenlos <span class="arrow">→</span></a>
+          <a href="#" class="appstore-badge" id="appstore-mid" data-appstore>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 12.04c-.03-2.6 2.13-3.85 2.22-3.91-1.21-1.77-3.1-2.01-3.77-2.04-1.6-.16-3.13.94-3.94.94-.81 0-2.07-.92-3.4-.9-1.75.03-3.36 1.02-4.26 2.58-1.82 3.16-.47 7.83 1.3 10.39.86 1.25 1.89 2.66 3.23 2.61 1.3-.05 1.79-.84 3.36-.84 1.57 0 2.01.84 3.38.81 1.4-.02 2.28-1.28 3.13-2.54.98-1.45 1.39-2.86 1.41-2.93-.03-.01-2.71-1.04-2.74-4.13-.02-2.58 0 0 0 0zM14.6 4.42c.72-.87 1.2-2.08 1.07-3.29-1.03.04-2.28.69-3.02 1.56-.66.77-1.24 2-1.08 3.18 1.15.09 2.32-.58 3.03-1.45z"/></svg>
+          <div class="t"><small>Laden im</small><span>App Store</span></div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. HOW IT WORKS -->
+    <section id="how">
+      <div class="wrap">
+        <div class="section-head"><h2>So einfach geht's</h2></div>
+        <div class="steps">
+          <div class="step"><div class="num">1</div><h3>App laden</h3><p>Stackr kostenlos aus dem App Store.</p></div>
+          <div class="step"><div class="num">2</div><h3>Code wird eingetragen</h3><p>Dein Rabattcode aktiviert sich automatisch.</p></div>
+          <div class="step"><div class="num">3</div><h3>Pro genießen</h3><p><span id="how-trial">14</span> Tage alle Premium-Features.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. FOOTER CTA -->
+    <section id="cta3">
+      <div class="wrap">
+        <div class="cta-block">
+          <a href="#" class="btn full" id="cta-foot" data-cta>Jetzt kostenlos starten <span class="arrow">→</span></a>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p class="risk">Kein Abo. Kein Risiko. Jederzeit kündbar.</p>
+      <p>© Stackr · <a href="/privacy/">Datenschutz</a> · <a href="/terms/">AGB</a></p>
+    </footer>
+  </main>
+
+  <!-- Sticky CTA -->
+  <div class="sticky-cta" id="sticky">
+    <a href="#" class="btn full" id="cta-sticky" data-cta>Deal sichern — <span id="sticky-trial">14</span> Tage Pro gratis <span class="arrow">→</span></a>
+  </div>
+
+  <div class="toast" id="toast">Code kopiert ✓</div>
+
+  <script>
+    "use strict";
+
+    // ── Konfiguration ──────────────────────────────────────────────
+    // Supabase URL ist KEINE Secret → darf hier stehen.
+    const SUPABASE_URL = "https://nkoanxngnjupfluhcrav.supabase.co";
+    // Anon Key wird vom Supabase-Gateway verlangt (nicht sensibel, public-by-design).
+    const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5rb2FueG5nbmp1cGZsdWhjcmF2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc5NjU2NjIsImV4cCI6MjA5MzU0MTY2Mn0.Mnx01zES5P9FnivQRavbJOJQwNotvtYtZ3xXT7UMhjk";
+    const FN_GET = `${SUPABASE_URL}/functions/v1/get-influencer`;
+    const FN_TRACK = `${SUPABASE_URL}/functions/v1/track-influencer`;
+    const APP_STORE_URL = "https://apps.apple.com/app/stackr/id6748765911";
+    const FALLBACK_URL = "https://stackr.app";
+
+    const params = new URLSearchParams(window.location.search);
+    const ref = (params.get("ref") || "").trim().toLowerCase();
+    const shopParam = (params.get("shop") || "").trim().toLowerCase() || null;
+
+    const SHOP_LABELS = { esn: "ESN", mn: "More Nutrition", goat: "GOAT" };
+
+    let influencer = null;
+    let deepLink = "stackr://ref/";
+
+    // ── Analytics ──────────────────────────────────────────────────
+    function track(eventType, shop) {
+      try {
+        const payload = JSON.stringify({ slug: ref, event_type: eventType, shop: shop || shopParam });
+        // sendBeacon-fähig? → feuern & vergessen.
+        fetch(FN_TRACK, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "apikey": SUPABASE_ANON_KEY,
+            "Authorization": `Bearer ${SUPABASE_ANON_KEY}`,
+          },
+          body: payload,
+          keepalive: true,
+        }).catch(() => {});
+      } catch (_) {}
+    }
+
+    // ── Influencer laden ───────────────────────────────────────────
+    async function load() {
+      if (!ref || !/^[a-z0-9_-]{1,64}$/.test(ref)) return redirectFallback();
+      try {
+        const res = await fetch(`${FN_GET}?ref=${encodeURIComponent(ref)}${shopParam ? "&shop=" + encodeURIComponent(shopParam) : ""}`, {
+          headers: {
+            "apikey": SUPABASE_ANON_KEY,
+            "Authorization": `Bearer ${SUPABASE_ANON_KEY}`,
+          },
+        });
+        if (!res.ok) return redirectFallback();
+        influencer = await res.json();
+        if (!influencer || !influencer.slug) return redirectFallback();
+        render();
+      } catch (e) {
+        redirectFallback();
+      }
+    }
+
+    function redirectFallback() {
+      window.location.replace(FALLBACK_URL);
+    }
+
+    // ── Rendern ────────────────────────────────────────────────────
+    function render() {
+      const name = influencer.displayName || "Dein";
+      const trial = influencer.trialDays || 14;
+
+      document.title = `${name}s Stackr Community-Deal`;
+      setText("hero-name", name);
+      setText("cta2-name", name);
+      setText("hero-trial", trial);
+      setText("cta2-trial", trial);
+      setText("how-trial", trial);
+      setText("sticky-trial", trial);
+
+      // Deep Link: stackr://ref/<slug>  (App aktiviert Trial + Codes selbst)
+      deepLink = `stackr://ref/${encodeURIComponent(influencer.slug)}`;
+
+      renderCodes(influencer.codes || []);
+
+      // CTA-Buttons verkabeln
+      document.querySelectorAll("[data-cta]").forEach((el) => {
+        el.addEventListener("click", onCtaClick);
+      });
+      document.querySelectorAll("[data-appstore]").forEach((el) => {
+        el.setAttribute("href", APP_STORE_URL);
+        el.addEventListener("click", () => track("app_store_click"));
+      });
+
+      // Anzeigen
+      document.getElementById("loading").classList.add("hide");
+      const app = document.getElementById("app");
+      app.hidden = false;
+      setTimeout(() => document.getElementById("loading").remove(), 400);
+
+      setupStickyObserver();
+      setupAppOpenDetection();
+    }
+
+    function setText(id, txt) {
+      const el = document.getElementById(id);
+      if (el) el.textContent = txt;
+    }
+
+    function renderCodes(codes) {
+      const grid = document.getElementById("codes-grid");
+      if (!codes.length) {
+        document.getElementById("codes").style.display = "none";
+        return;
+      }
+      grid.innerHTML = codes.map((c) => {
+        const label = c.shopName || SHOP_LABELS[c.shop] || c.shop;
+        return `
+          <div class="code-card" data-code="${escapeHtml(c.code)}" data-shop="${escapeHtml(c.shop)}">
+            <div class="left">
+              <span class="shop">${escapeHtml(label)}</span>
+              <span class="code">${escapeHtml(c.code)} <span class="copy-ico">⧉</span></span>
+              <span class="copy-hint">Zum Kopieren tippen</span>
+            </div>
+            <div class="right">
+              <span class="discount-badge">SALE</span>
+            </div>
+          </div>`;
+      }).join("");
+
+      grid.querySelectorAll(".code-card").forEach((card) => {
+        card.addEventListener("click", () => copyCode(card));
+      });
+    }
+
+    function copyCode(card) {
+      const code = card.getAttribute("data-code");
+      const shop = card.getAttribute("data-shop");
+      const done = () => {
+        card.classList.add("copied");
+        card.querySelector(".copy-hint").textContent = "Kopiert ✓";
+        showToast(`${code} kopiert ✓`);
+        track("code_copy", shop);
+        setTimeout(() => {
+          card.classList.remove("copied");
+          const h = card.querySelector(".copy-hint");
+          if (h) h.textContent = "Zum Kopieren tippen";
+        }, 2000);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(code).then(done).catch(done);
+      } else {
+        const ta = document.createElement("textarea");
+        ta.value = code; document.body.appendChild(ta); ta.select();
+        try { document.execCommand("copy"); } catch (_) {}
+        document.body.removeChild(ta); done();
+      }
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById("toast");
+      t.textContent = msg; t.classList.add("show");
+      clearTimeout(showToast._t);
+      showToast._t = setTimeout(() => t.classList.remove("show"), 2200);
+    }
+
+    // ── CTA → Deep Link + App Store Fallback ───────────────────────
+    function onCtaClick(e) {
+      e.preventDefault();
+      track("cta_click");
+      openApp();
+    }
+
+    function openApp() {
+      // Versuche App zu öffnen; falls nicht installiert → App Store.
+      const start = Date.now();
+      let fallback = setTimeout(() => {
+        if (Date.now() - start < 2500) {
+          window.location.href = APP_STORE_URL;
+        }
+      }, 1500);
+
+      const cancel = () => {
+        if (document.hidden) {
+          clearTimeout(fallback);
+          track("app_open");
+        }
+      };
+      document.addEventListener("visibilitychange", cancel, { once: true });
+
+      window.location.href = deepLink;
+    }
+
+    function setupAppOpenDetection() {
+      document.addEventListener("visibilitychange", () => {
+        if (document.hidden) track("app_open");
+      }, { once: true });
+    }
+
+    // ── Sticky CTA bei Scroll ──────────────────────────────────────
+    function setupStickyObserver() {
+      const hero = document.querySelector(".hero");
+      const sticky = document.getElementById("sticky");
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach((en) => {
+          if (en.isIntersecting) sticky.classList.remove("show");
+          else sticky.classList.add("show");
+        });
+      }, { threshold: 0 });
+      obs.observe(hero);
+    }
+
+    function escapeHtml(s) {
+      return String(s).replace(/[&<>"']/g, (c) => ({
+        "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;",
+      }[c]));
+    }
+
+    load();
+  </script>
+</body>
+</html>
