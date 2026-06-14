@@ -281,6 +281,34 @@
     .appstore-badge .t small { font-size: .62rem; color: #bbb; }
     .appstore-badge .t span { font-size: 1.05rem; font-weight: 700; }
 
+    /* ── INFLUENCER PROFILE ── */
+    .influencer-profile {
+      display: flex; align-items: center; gap: 1rem;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1rem 1.25rem;
+      max-width: 480px; margin: 0 auto 0;
+    }
+    .influencer-avatar {
+      width: 52px; height: 52px; border-radius: 50%;
+      background: var(--orange); color: #fff;
+      font-size: 1.4rem; font-weight: 900;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; border: 2px solid var(--orange-light);
+    }
+    .influencer-info { flex: 1; min-width: 0; }
+    .influencer-info .inf-name { font-size: 1rem; font-weight: 800; }
+    .influencer-info .inf-bio { font-size: .82rem; color: var(--muted); margin-top: .15rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .social-handles { display: flex; gap: .5rem; margin-top: .5rem; flex-wrap: wrap; }
+    .social-handle {
+      display: inline-flex; align-items: center; gap: .3rem;
+      background: #222; border: 1px solid var(--border);
+      border-radius: 999px; padding: .3rem .7rem;
+      font-size: .78rem; font-weight: 600; color: var(--text);
+      text-decoration: none; transition: border-color .2s, background .2s;
+    }
+    .social-handle:hover { background: #2a2a2a; border-color: #444; }
+    .social-handle .sh-icon { font-size: .9rem; }
+
     /* ── HOW IT WORKS ── */
     .steps { display: grid; gap: 1.25rem; grid-template-columns: repeat(3, 1fr); max-width: 760px; margin: 0 auto; }
     @media (max-width: 640px) { .steps { grid-template-columns: 1fr; } }
@@ -349,6 +377,20 @@
         </div>
       </div>
     </header>
+
+    <!-- 1b. INFLUENCER PROFILE -->
+    <section id="influencer-profile-section" style="padding: 0 0 2rem; display:none;">
+      <div class="wrap">
+        <div class="influencer-profile">
+          <div class="influencer-avatar" id="inf-avatar">A</div>
+          <div class="influencer-info">
+            <div class="inf-name" id="inf-fullname">Anton</div>
+            <div class="inf-bio" id="inf-bio"></div>
+            <div class="social-handles" id="inf-socials"></div>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- 2. CODE SHOWCASE -->
     <section id="codes">
@@ -526,7 +568,34 @@
     // ── Rendern ────────────────────────────────────────────────────
     function render() {
       const name = influencer.displayName || "Dein";
+      const fullName = influencer.fullName || name;
       const trial = influencer.trialDays || 14;
+
+      // Influencer Profile
+      const profileSection = document.getElementById("influencer-profile-section");
+      document.getElementById("inf-avatar").textContent = fullName.charAt(0).toUpperCase();
+      document.getElementById("inf-fullname").textContent = fullName;
+      if (influencer.bio) document.getElementById("inf-bio").textContent = influencer.bio;
+
+      // Social Handles
+      const socialsEl = document.getElementById("inf-socials");
+      const handles = [
+        { key: "instagram", icon: "📸", label: "@" + influencer.instagram, url: "https://instagram.com/" + influencer.instagram },
+        { key: "tiktok",    icon: "🎵", label: "@" + influencer.tiktok,    url: "https://tiktok.com/@" + influencer.tiktok },
+        { key: "facebook",  icon: "👥", label: influencer.facebook,         url: "https://facebook.com/" + influencer.facebook },
+      ];
+      handles.forEach(h => {
+        if (!influencer[h.key]) return;
+        const a = document.createElement("a");
+        a.className = "social-handle";
+        a.href = h.url;
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+        a.innerHTML = `<span class="sh-icon">${h.icon}</span>${escapeHtml(h.label)}`;
+        a.addEventListener("click", () => track("social_click", h.key));
+        socialsEl.appendChild(a);
+      });
+      profileSection.style.display = "block";
 
       document.title = `${name}s Stackr Community-Deal`;
       setText("hero-name", name);
