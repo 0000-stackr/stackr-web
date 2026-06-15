@@ -355,49 +355,25 @@
     .phone.mid { position: relative; }
     .screenshot-code-overlay {
       position: absolute;
-      /* Deckt den hardcoded Code-Bereich im Screenshot ab (~68%-82% von oben) */
-      top: 68%;
-      left: 10px;
-      right: 10px;
-      background: var(--bg);
-      border: 1.5px solid var(--orange);
-      border-radius: 12px;
-      padding: .5rem 1rem;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: space-between;
-      gap: .5rem;
-      box-shadow: 0 4px 20px rgba(191,54,12,0.4);
+      /* Badge sitzt bei ~85% von oben im Screenshot, innerhalb des Phone-Frames */
+      top: 82.5%;
+      left: 14px;
       pointer-events: none;
       z-index: 4;
     }
-    .screenshot-code-overlay .ov-left {
-      display: flex;
-      flex-direction: column;
-      gap: .1rem;
-    }
-    .screenshot-code-overlay .ov-label {
-      font-size: .6rem;
-      font-weight: 700;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: .06em;
-    }
-    .screenshot-code-overlay .ov-code {
-      font-size: 1.15rem;
-      font-weight: 900;
-      color: var(--orange-light);
-      letter-spacing: .12em;
-    }
-    .screenshot-code-overlay .ov-badge {
-      background: var(--orange);
+    /* Pill-Badge exakt wie in der App: orange bg, weißer Text, gerundete Ecken */
+    .screenshot-code-overlay .ov-pill {
+      display: inline-flex;
+      align-items: center;
+      background: #E8540C;
       color: #fff;
-      font-size: .7rem;
-      font-weight: 800;
-      padding: .25rem .6rem;
-      border-radius: 8px;
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+      font-size: .72rem;
+      font-weight: 700;
+      padding: .28rem .65rem;
+      border-radius: 999px;
       white-space: nowrap;
+      letter-spacing: .01em;
     }
   </style>
 </head>
@@ -467,11 +443,7 @@
           <div class="phone mid">
             <img src="/assets/screenshots/20260607_103440000_iOS.png" alt="ESN Kreatin mit Rabattcode" loading="lazy" />
             <div class="screenshot-code-overlay" id="screenshot-overlay" style="display:none;">
-              <div class="ov-left">
-                <span class="ov-label">Dein Code</span>
-                <span class="ov-code" id="overlay-code"></span>
-              </div>
-              <span class="ov-badge" id="overlay-shop">ESN</span>
+              <span class="ov-pill">-25% mit <span id="overlay-code"></span></span>
             </div>
           </div>
           <div class="phone tilt-r">
@@ -671,10 +643,8 @@
       if (codes.length > 0) {
         const overlayEl = document.getElementById("screenshot-overlay");
         const overlayCode = document.getElementById("overlay-code");
-        const overlayShop = document.getElementById("overlay-shop");
         overlayCode.textContent = codes[0].discount_code || codes[0].code || "";
-        overlayShop.textContent = codes[0].shop_name || codes[0].shop || "ESN";
-        overlayEl.style.display = "flex";
+        overlayEl.style.display = "block";
       }
 
       // CTA-Buttons verkabeln
