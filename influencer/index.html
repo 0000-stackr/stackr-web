@@ -350,6 +350,42 @@
       box-shadow: 0 8px 24px rgba(0,0,0,.4);
     }
     .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    /* ── CODE OVERLAY auf Screenshot ── */
+    .phone.mid { position: relative; }
+    .screenshot-code-overlay {
+      position: absolute;
+      bottom: 18%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(13,13,13,0.92);
+      border: 1.5px solid var(--orange);
+      border-radius: 12px;
+      padding: .45rem 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .15rem;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      box-shadow: 0 4px 20px rgba(191,54,12,0.35);
+      pointer-events: none;
+      z-index: 4;
+      white-space: nowrap;
+    }
+    .screenshot-code-overlay .ov-label {
+      font-size: .58rem;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+    .screenshot-code-overlay .ov-code {
+      font-size: 1.1rem;
+      font-weight: 900;
+      color: var(--orange-light);
+      letter-spacing: .1em;
+    }
   </style>
 </head>
 <body>
@@ -417,6 +453,10 @@
           </div>
           <div class="phone mid">
             <img src="/assets/screenshots/20260607_103440000_iOS.png" alt="ESN Kreatin mit Rabattcode" loading="lazy" />
+            <div class="screenshot-code-overlay" id="screenshot-overlay" style="display:none;">
+              <span class="ov-label">Dein Code</span>
+              <span class="ov-code" id="overlay-code"></span>
+            </div>
           </div>
           <div class="phone tilt-r">
             <img src="/assets/screenshots/20260605_194048000_iOS.png" alt="ESN Daily mit Rabattcode" loading="lazy" />
@@ -609,6 +649,15 @@
       deepLink = `stackr://ref/${encodeURIComponent(influencer.slug)}`;
 
       renderCodes(influencer.codes || []);
+
+      // Screenshot Code-Overlay
+      const codes = influencer.codes || [];
+      if (codes.length > 0) {
+        const overlayEl = document.getElementById("screenshot-overlay");
+        const overlayCode = document.getElementById("overlay-code");
+        overlayCode.textContent = codes[0].discount_code || codes[0].code || "";
+        overlayEl.style.display = "flex";
+      }
 
       // CTA-Buttons verkabeln
       document.querySelectorAll("[data-cta]").forEach((el) => {
