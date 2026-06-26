@@ -561,7 +561,7 @@
       try {
         const payload = JSON.stringify({ slug: ref, event_type: eventType, shop: shop || shopParam });
         // Best-effort Analytics in das stackr-Schema. Fehlt die Tabelle, scheitert es still.
-        fetch(`${REST}/influencer_link_events`, {
+        fetch(`${REST}/influencer_page_events`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
