@@ -396,7 +396,7 @@
         <img class="app-icon" src="/assets/app-icon.png" alt="Stackr App" />
         <div class="badge-pill"><span class="dot"></span> Exklusiver Community-Deal</div>
         <h1><span id="hero-name" class="accent">…</span>s<br>Community-Deal</h1>
-        <p class="sub"><strong><span id="hero-trial">14</span> Tage Pro kostenlos</strong> + dein persönlicher Rabattcode für ESN &amp; More Nutrition.</p>
+        <p class="sub" id="hero-sub"><strong><span id="hero-trial">14</span> Tage Pro kostenlos</strong> + dein persönlicher Rabattcode für ESN &amp; More Nutrition.</p>
         <a href="#" class="btn" id="cta-hero" data-cta>Jetzt kostenlos starten <span class="arrow">→</span></a>
         <div class="social-proof">
           <div class="avatars"><span>S</span><span>M</span><span>K</span><span>+</span></div>
@@ -679,6 +679,24 @@
       deepLink = `stackr://ref/${encodeURIComponent(influencer.slug)}`;
 
       renderCodes(influencer.codes || []);
+
+      // Hero-Subtext: Shop-Namen dynamisch aus den geladenen DB-Codes bauen
+      const subEl = document.getElementById("hero-sub");
+      if (subEl) {
+        const shopNames = [];
+        (influencer.codes || []).forEach((c) => {
+          const label = c.shopName || SHOP_LABELS[c.shop] || c.shop;
+          if (label && !shopNames.includes(label)) shopNames.push(label);
+        });
+        const shopsText = shopNames.length === 0
+          ? ""
+          : shopNames.length === 1
+            ? shopNames[0]
+            : shopNames.slice(0, -1).join(", ") + " & " + shopNames[shopNames.length - 1];
+        subEl.innerHTML = shopsText
+          ? `<strong><span id="hero-trial">${trial}</span> Tage Pro kostenlos</strong> + dein persönlicher Rabattcode für ${escapeHtml(shopsText)}.`
+          : `<strong><span id="hero-trial">${trial}</span> Tage Pro kostenlos</strong> + dein persönlicher Rabattcode.`;
+      }
 
       // Screenshot Code-Overlay
       const codes = influencer.codes || [];
