@@ -537,11 +537,13 @@
 
     // ── Konfiguration ──────────────────────────────────────────────
     // Supabase URL ist KEINE Secret → darf hier stehen.
-    const SUPABASE_URL = "https://nkoanxngnjupfluhcrav.supabase.co";
-    // Anon Key wird vom Supabase-Gateway verlangt (nicht sensibel, public-by-design).
-    const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5rb2FueG5nbmp1cGZsdWhjcmF2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc5NjU2NjIsImV4cCI6MjA5MzU0MTY2Mn0.Mnx01zES5P9FnivQRavbJOJQwNotvtYtZ3xXT7UMhjk";
-    const FN_GET = `${SUPABASE_URL}/functions/v1/get-influencer`;
-    const FN_TRACK = `${SUPABASE_URL}/functions/v1/track-influencer`;
+    // Kellr-Projekt (gemeinsame Supabase); Influencer-Daten liegen im Schema "stackr".
+    const SUPABASE_URL = "https://bflxydqsutvpjzrevjlh.supabase.co";
+    // Publishable/Anon Key wird vom Supabase-Gateway verlangt (nicht sensibel, public-by-design).
+    const SUPABASE_ANON_KEY = "sb_publishable_CbyXLJCDTEuMWySUr-RI5A_7rzv9WvM";
+    // Tabellen liegen im Schema "stackr" → PostgREST braucht Accept-Profile / Content-Profile.
+    const SUPABASE_SCHEMA = "stackr";
+    const REST = `${SUPABASE_URL}/rest/v1`;
     const APP_STORE_URL = "https://apps.apple.com/app/stackr/id6748765911";
     const FALLBACK_URL = "https://stackr.info";
 
@@ -558,13 +560,15 @@
     function track(eventType, shop) {
       try {
         const payload = JSON.stringify({ slug: ref, event_type: eventType, shop: shop || shopParam });
-        // sendBeacon-fähig? → feuern & vergessen.
-        fetch(FN_TRACK, {
+        // Best-effort Analytics in das stackr-Schema. Fehlt die Tabelle, scheitert es still.
+        fetch(`${REST}/influencer_link_events`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            "Content-Profile": SUPABASE_SCHEMA,
             "apikey": SUPABASE_ANON_KEY,
             "Authorization": `Bearer ${SUPABASE_ANON_KEY}`,
+            "Prefer": "return=minimal",
           },
           body: payload,
           keepalive: true,
@@ -573,18 +577,54 @@
     }
 
     // ── Influencer laden ───────────────────────────────────────────
+    // Shop-ID → Slug Mapping (für CTA/Tracking-Konsistenz).
+    const SHOP_ID_SLUG = { 6: "esn", 7: "mn", 8: "goat" };
+
     async function load() {
       if (!ref || !/^[a-z0-9_-]{1,64}$/.test(ref)) return redirectFallback();
       try {
-        const res = await fetch(`${FN_GET}?ref=${encodeURIComponent(ref)}${shopParam ? "&shop=" + encodeURIComponent(shopParam) : ""}`, {
+        // Direkter PostgREST-Call ins Schema "stackr" (Accept-Profile-Header!).
+        // Influencer + zugehörige Codes in einem Request via Resource Embedding.
+        const url = `${REST}/influencers?slug=eq.${encodeURIComponent(ref)}`
+          + `&is_active=eq.true`
+          + `&select=slug,display_name,full_name,notes,instagram_handle,tiktok_handle,facebook_handle,trial_days,influencer_codes(shop_id,shop_name,discount_code,is_active)`;
+        const res = await fetch(url, {
           headers: {
+            "Accept-Profile": SUPABASE_SCHEMA,
             "apikey": SUPABASE_ANON_KEY,
             "Authorization": `Bearer ${SUPABASE_ANON_KEY}`,
           },
         });
         if (!res.ok) return redirectFallback();
-        influencer = await res.json();
-        if (!influencer || !influencer.slug) return redirectFallback();
+        const rows = await res.json();
+        const row = Array.isArray(rows) ? rows[0] : null;
+        if (!row || !row.slug) return redirectFallback();
+
+        // snake_case (DB) → von render() erwartetes Shape adaptieren.
+        const codes = (row.influencer_codes || [])
+          .filter((c) => c.is_active !== false)
+          .filter((c) => !shopParam || SHOP_ID_SLUG[c.shop_id] === shopParam)
+          .map((c) => {
+            const slug = SHOP_ID_SLUG[c.shop_id] || (c.shop_name || "").toLowerCase();
+            return {
+              code: c.discount_code,
+              discount_code: c.discount_code,
+              shop: slug,
+              shopName: c.shop_name,
+            };
+          });
+
+        influencer = {
+          slug: row.slug,
+          displayName: row.display_name,
+          fullName: row.full_name || row.display_name,
+          bio: row.notes || "",
+          instagram: row.instagram_handle || "",
+          tiktok: row.tiktok_handle || "",
+          facebook: row.facebook_handle || "",
+          trialDays: row.trial_days || 14,
+          codes,
+        };
         render();
       } catch (e) {
         redirectFallback();
