@@ -5,7 +5,7 @@
   <link rel="icon" type="image/png" href="/assets/app-icon.png" />
   <link rel="apple-touch-icon" href="/assets/app-icon.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Stackr Partner — 6 Monate Pro kostenlos</title>
+  <title id="page-title">Stackr Partner — 6 Monate Pro kostenlos</title>
   <meta name="description" content="Als Stackr Partner: 6 Monate Pro komplett kostenlos + dein eigener Rabattcode für deine Community." />
   <meta name="robots" content="noindex" />
   <meta property="og:title" content="Dein Stackr Partner-Deal" />
@@ -298,13 +298,13 @@
         <p class="greet">Hey <span id="hero-name">…</span>! 👋</p>
 
         <div class="offer-badge">
-          <div class="big"><span class="accent">6 Monate</span></div>
+          <div class="big"><span class="accent" id="offer-duration">6 Monate</span></div>
           <div class="label">Stackr Pro — kostenlos</div>
         </div>
 
-        <h1>Deine 6 Monate<br>Stackr Pro — <span class="accent">kostenlos.</span></h1>
-        <p class="sub">Als <strong>Stackr Partner</strong> bekommst du 6 Monate Pro komplett kostenlos.</p>
-        <a href="#" class="btn" id="cta-hero" data-cta>6 Monate Pro aktivieren <span class="arrow">→</span></a>
+        <h1 id="hero-h1">Deine 6 Monate<br>Stackr Pro — <span class="accent">kostenlos.</span></h1>
+        <p class="sub" id="hero-sub">Als <strong>Stackr Partner</strong> bekommst du 6 Monate Pro komplett kostenlos.</p>
+        <a href="#" class="btn" id="cta-hero" data-cta><span id="cta-hero-text">6 Monate Pro aktivieren</span> <span class="arrow">→</span></a>
       </div>
     </header>
 
@@ -358,7 +358,7 @@
         <div class="steps">
           <div class="step"><div class="num">1</div><h3>App laden</h3><p>Stackr kostenlos aus dem App Store.</p></div>
           <div class="step"><div class="num">2</div><h3>Code wird eingelöst</h3><p>Dein Partner-Code aktiviert sich automatisch.</p></div>
-          <div class="step"><div class="num">3</div><h3>6 Monate Pro</h3><p>Voller Zugriff auf alle Premium-Features.</p></div>
+          <div class="step"><div class="num">3</div><h3 id="step3-title">6 Monate Pro</h3><p id="step3-desc">Voller Zugriff auf alle Premium-Features.</p></div>
         </div>
       </div>
     </section>
@@ -368,7 +368,7 @@
       <div class="wrap">
         <div class="cta-block">
           <h2>Bereit, <span id="cta2-name" style="color:var(--orange-light)">…</span>?</h2>
-          <a href="#" class="btn full" id="cta-mid" data-cta>6 Monate Pro aktivieren <span class="arrow">→</span></a>
+          <a href="#" class="btn full" id="cta-mid" data-cta><span id="cta-mid-text">6 Monate Pro aktivieren</span> <span class="arrow">→</span></a>
           <a href="#" class="appstore-badge" id="appstore-mid" data-appstore>
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 12.04c-.03-2.6 2.13-3.85 2.22-3.91-1.21-1.77-3.1-2.01-3.77-2.04-1.6-.16-3.13.94-3.94.94-.81 0-2.07-.92-3.4-.9-1.75.03-3.36 1.02-4.26 2.58-1.82 3.16-.47 7.83 1.3 10.39.86 1.25 1.89 2.66 3.23 2.61 1.3-.05 1.79-.84 3.36-.84 1.57 0 2.01.84 3.38.81 1.4-.02 2.28-1.28 3.13-2.54.98-1.45 1.39-2.86 1.41-2.93-.03-.01-2.71-1.04-2.74-4.13-.02-2.58 0 0 0 0zM14.6 4.42c.72-.87 1.2-2.08 1.07-3.29-1.03.04-2.28.69-3.02 1.56-.66.77-1.24 2-1.08 3.18 1.15.09 2.32-.58 3.03-1.45z"/></svg>
           <div class="t"><small>Laden im</small><span>App Store</span></div>
@@ -382,8 +382,8 @@
       <div class="wrap">
         <div class="redeemed-block">
           <div class="check">✓</div>
-          <h2>Dein Code wurde bereits eingelöst.</h2>
-          <p>Du nutzt bereits deine 6 Monate Stackr Pro. Bei Fragen erreichst du uns unter <a href="mailto:support@stackr.info">support@stackr.info</a>.</p>
+          <h2 id="redeemed-title">Dein Code wurde bereits eingelöst.</h2>
+          <p id="redeemed-desc">Du nutzt bereits deine 6 Monate Stackr Pro. Bei Fragen erreichst du uns unter <a href="mailto:support@stackr.info">support@stackr.info</a>.</p>
         </div>
       </div>
     </section>
@@ -396,7 +396,7 @@
 
   <!-- Sticky CTA -->
   <div class="sticky-cta" id="sticky">
-    <a href="#" class="btn full" id="cta-sticky" data-cta>6 Monate Pro aktivieren <span class="arrow">→</span></a>
+    <a href="#" class="btn full" id="cta-sticky" data-cta><span id="cta-sticky-text">6 Monate Pro aktivieren</span> <span class="arrow">→</span></a>
   </div>
 
   <script>
@@ -424,7 +424,7 @@
       if (!ref || !/^[a-z0-9_-]{1,64}$/.test(ref)) return redirectFallback();
       try {
         const url = `${REST}/influencers?slug=eq.${encodeURIComponent(ref)}`
-          + `&select=slug,display_name,partner_code,partner_code_redeemed`;
+          + `&select=slug,display_name,partner_code,partner_code_redeemed,partner_grant_lifetime`;
         const res = await fetch(url, {
           headers: {
             "Accept-Profile": SUPABASE_SCHEMA,
@@ -442,6 +442,7 @@
           displayName: row.display_name || "Partner",
           partnerCode: row.partner_code,
           redeemed: row.partner_code_redeemed === true,
+          isLifetime: row.partner_grant_lifetime === true,
         };
         render();
       } catch (e) {
@@ -453,17 +454,60 @@
       window.location.replace(FALLBACK_URL);
     }
 
+    // ── Lifetime-Texte anpassen ────────────────────────────────────
+    function applyLifetimeTexts() {
+      // Page title
+      document.title = `Stackr Partner — Lebenslang Pro kostenlos`;
+
+      // Hero badge
+      const offerDuration = document.getElementById("offer-duration");
+      if (offerDuration) offerDuration.textContent = "Lebenslang";
+
+      // Hero h1
+      const heroH1 = document.getElementById("hero-h1");
+      if (heroH1) heroH1.innerHTML = 'Dein lebenslanger<br>Stackr Pro-Zugang — <span class="accent">kostenlos.</span>';
+
+      // Hero sub
+      const heroSub = document.getElementById("hero-sub");
+      if (heroSub) heroSub.innerHTML = 'Als <strong>Stackr Partner</strong> bekommst du lebenslangen Pro-Zugang komplett kostenlos.';
+
+      // CTA buttons
+      const ctaTexts = ["cta-hero-text", "cta-mid-text", "cta-sticky-text"];
+      ctaTexts.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = "Lebenslang Pro aktivieren";
+      });
+
+      // Step 3
+      const step3Title = document.getElementById("step3-title");
+      if (step3Title) step3Title.textContent = "Lebenslang Pro";
+      const step3Desc = document.getElementById("step3-desc");
+      if (step3Desc) step3Desc.textContent = "Voller Zugriff auf alle Premium-Features — für immer.";
+
+      // Redeemed state
+      const redeemedDesc = document.getElementById("redeemed-desc");
+      if (redeemedDesc) redeemedDesc.innerHTML = 'Du nutzt bereits deinen lebenslangen Stackr Pro-Zugang. Bei Fragen erreichst du uns unter <a href="mailto:support@stackr.info">support@stackr.info</a>.';
+      const redeemedTitle = document.getElementById("redeemed-title");
+      if (redeemedTitle) redeemedTitle.textContent = "Dein Code wurde bereits eingelöst.";
+    }
+
     // ── Rendern ────────────────────────────────────────────────────
     function render() {
       const name = partner.displayName || "Partner";
 
-      document.title = `${name} — 6 Monate Stackr Pro kostenlos`;
       setText("hero-name", name);
       setText("cta2-name", name);
       setText("partner-code", partner.partnerCode);
 
       // Deep Link: stackr://redeem?code=<partner_code>
       deepLink = `stackr://redeem?code=${encodeURIComponent(partner.partnerCode)}`;
+
+      // Apply lifetime-specific texts if applicable
+      if (partner.isLifetime) {
+        applyLifetimeTexts();
+      } else {
+        document.title = `${name} — 6 Monate Stackr Pro kostenlos`;
+      }
 
       if (partner.redeemed) {
         // Eingelöster Zustand: Aktivierungs-Sektionen ausblenden, Redeemed-Block zeigen
