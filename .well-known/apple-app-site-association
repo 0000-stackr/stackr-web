@@ -7,6 +7,10 @@
           {
             "/": "/ref*",
             "comment": "Influencer deeplink — stackr.info/ref?esn=CODE&mn=CODE"
+          },
+          {
+            "/": "/nfc/*",
+            "comment": "NFC Background Tag Reading — stackr.app/nfc/<tag_uid>"
           }
         ]
       }
