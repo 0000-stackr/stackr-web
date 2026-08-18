@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="/assets/app-icon.png" />
+  <link rel="apple-touch-icon" href="/assets/app-icon.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Impressum – Stackr</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --orange: #BF360C; --orange-light: #FF6D40; --bg: #0D0D0D; --card: #1A1A1A; --border: #2A2A2A; --text: #F5F5F5; --muted: #888; }
+    body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif; -webkit-font-smoothing: antialiased; line-height: 1.7; }
+
+    nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 clamp(1.5rem, 5vw, 4rem); height: 64px;
+      background: rgba(13,13,13,0.9); backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo img { width: 30px; height: 30px; border-radius: 7px; }
+    .nav-logo span { font-size: 1.1rem; font-weight: 800; color: var(--text); }
+    nav a.back { color: var(--muted); text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+    nav a.back:hover { color: var(--text); }
+
+    .container { max-width: 780px; margin: 0 auto; padding: clamp(3rem, 6vh, 5rem) clamp(1.5rem, 5vw, 3rem); }
+
+    h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 900; letter-spacing: -0.03em; margin-bottom: 0.5rem; }
+    .meta { color: var(--muted); font-size: 0.85rem; margin-bottom: 3rem; }
+    .meta span { color: var(--orange-light); }
+
+    h2 { font-size: 1.15rem; font-weight: 800; margin-top: 2.5rem; margin-bottom: 0.75rem; color: var(--text); }
+    p { color: #ccc; margin-bottom: 1rem; font-size: 0.95rem; }
+    a { color: var(--orange-light); }
+
+    footer { text-align: center; padding: 2rem; color: var(--muted); font-size: 0.8rem; border-top: 1px solid var(--border); margin-top: 4rem; }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="/" class="nav-logo">
+      <img src="/assets/app-icon.png" alt="Stackr" />
+      <span>Stackr</span>
+    </a>
+    <a href="/" class="back">← Zurück</a>
+  </nav>
+
+  <div class="container">
+    <h1>Impressum</h1>
+    <p class="meta">Angaben gemäß <span>§5 ECG</span> (E-Commerce-Gesetz)</p>
+
+    <h2>Diensteanbieter</h2>
+    <p>
+      The R Company (Michael Seidl)<br>
+      Wilhelm-Fein-Straße 37<br>
+      4540 Pfarrkirchen im Traunkreis<br>
+      Österreich
+    </p>
+
+    <h2>Kontakt</h2>
+    <p>
+      E-Mail: <a href="mailto:support@stackr.app">support@stackr.app</a><br>
+      Website: <a href="https://stackr.info">https://stackr.info</a>
+    </p>
+
+    <h2>Zweck</h2>
+    <p>
+      Stackr ist eine iOS-App zur Verwaltung von Nahrungsergänzungsmitteln (Supplements). Die App ist im Apple App Store verfügbar und bietet neben einer kostenlosen Basisversion das kostenpflichtige Abo <strong>Stackr Pro</strong> an.
+    </p>
+
+    <h2>Haftungsausschluss</h2>
+    <p>
+      Die Inhalte dieser Website wurden mit größtmöglicher Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte kann jedoch keine Gewähr übernommen werden.
+    </p>
+    <p>
+      Als Diensteanbieter sind wir gemäß §17 ECG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben, können trotz sorgfältiger Prüfung nicht dauerhaft überwacht werden.
+    </p>
+
+    <h2>Online-Streitbeilegung</h2>
+    <p>
+      Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit:<br>
+      <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener">https://ec.europa.eu/consumers/odr</a>
+    </p>
+
+    <h2>Urheberrecht</h2>
+    <p>
+      Die durch den Seitenbetreiber erstellten Inhalte und Werke auf dieser Website unterliegen dem österreichischen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechts bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers.
+    </p>
+
+    <h2>Offenlegung gemäß §25 MedienG</h2>
+    <p>
+      <strong>Medieninhaber &amp; Herausgeber:</strong> The R Company (Michael Seidl), Wilhelm-Fein-Straße 37, 4540 Pfarrkirchen im Traunkreis, Österreich<br>
+      <strong>Blattlinie:</strong> Informationsseite zur Stackr iOS-App (Supplement-Tracking). Keine politische Ausrichtung. Die App wird kommerziell als kostenpflichtiges Abo (Stackr Pro) angeboten.
+    </p>
+  </div>
+
+  <footer>
+    © 2026 Stackr · The R Company · <a href="/privacy">Datenschutz</a> · <a href="/terms">Nutzungsbedingungen</a> · Made with 🧡 in Austria
+  </footer>
+</body>
+</html>
